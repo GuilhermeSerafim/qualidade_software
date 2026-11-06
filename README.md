@@ -23,8 +23,14 @@ Este é um projeto educacional em Java usando Spring Boot e Maven para ensinar c
 
 Este projeto utiliza um banco de dados MongoDB hospedado remotamente para fins educacionais:
 ```
-mongodb://mongo:XdnCdkmKwzJiKHiryTDzdgRGOxzNQYtA@crossover.proxy.rlwy.net:24258
+mongodb://<DB_USER>:<DB_PASSWORD>@<DB_HOST>:<DB_PORT>/<DB_NAME>
 ```
+
+### Configuração local
+
+O exemplo é deliberadamente incompleto. Substitua os marcadores somente no mecanismo privado de configuração adotado pela aplicação. Não publique uma URI preenchida. Os nomes entre marcadores são documentação; esta revisão não confirmou variáveis de ambiente correspondentes no código.
+
+A troca do exemplo não revoga credenciais anteriormente divulgadas. O responsável pelo banco deve identificar o ambiente e a conta correspondentes e, caso tenham sido utilizados, substituir ou revogar o acesso e avaliar reutilização. Esta revisão não tentou conectar ao banco nem verificou a validade dos dados publicados.
 
 ## Começando
 
