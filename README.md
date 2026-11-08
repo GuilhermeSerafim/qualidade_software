@@ -21,16 +21,39 @@ Este é um projeto educacional em Java usando Spring Boot e Maven para ensinar c
 
 ## Conexão ao Banco de Dados
 
-Este projeto utiliza um banco de dados MongoDB hospedado remotamente para fins educacionais:
-```
-mongodb://<DB_USER>:<DB_PASSWORD>@<DB_HOST>:<DB_PORT>/<DB_NAME>
-```
+A conexão MongoDB é fornecida pela variável de ambiente `MONGODB_URI` do processo
+que inicia a aplicação. `src/main/resources/application.properties` usa
+`spring.data.mongodb.uri=${MONGODB_URI}`, sem URI ou credenciais padrão no código.
+Defina essa variável antes de executar a aplicação; mantenha o valor real no
+ambiente privado ou no gerenciador de segredos da hospedagem.
 
 ### Configuração local
 
-O exemplo é deliberadamente incompleto. Substitua os marcadores somente no mecanismo privado de configuração adotado pela aplicação. Não publique uma URI preenchida. Os nomes entre marcadores são documentação; esta revisão não confirmou variáveis de ambiente correspondentes no código.
+Para uma instância MongoDB de desenvolvimento já disponível na própria máquina,
+o exemplo abaixo usa somente loopback e uma base local, sem credenciais reais.
+Ele não instala nem inicia o MongoDB.
 
-A troca do exemplo não revoga credenciais anteriormente divulgadas. O responsável pelo banco deve identificar o ambiente e a conta correspondentes e, caso tenham sido utilizados, substituir ou revogar o acesso e avaliar reutilização. Esta revisão não tentou conectar ao banco nem verificou a validade dos dados publicados.
+No PowerShell, no mesmo terminal que iniciará a aplicação:
+
+```powershell
+$env:MONGODB_URI = 'mongodb://127.0.0.1:27017/educational_quality_local'
+```
+
+No Bash:
+
+```bash
+export MONGODB_URI='mongodb://127.0.0.1:27017/educational_quality_local'
+```
+
+Depois, execute um dos comandos Maven da seção abaixo. O projeto não carrega arquivos `.env` automaticamente;
+criar esse arquivo ou copiar um modelo não define a variável no processo.
+Para um banco remoto próprio, injete a URI privadamente, sem colá-la em arquivos
+versionados, documentação ou logs. Não reutilize credenciais anteriormente divulgadas.
+
+A remoção da URI do código não revoga credenciais nem remove versões do histórico.
+O responsável pelo banco deve identificar o ambiente e a conta correspondentes,
+substituir ou revogar o acesso utilizado e avaliar reutilização. Esta correção não
+conectou ao banco nem verificou a validade dos dados publicados.
 
 ## Começando
 
@@ -68,7 +91,8 @@ sudo dnf install maven
 
 1. Clone o repositório
 2. Navegue até o diretório do projeto
-3. Execute a aplicação usando Maven:
+3. Defina `MONGODB_URI` no ambiente conforme a seção de configuração.
+4. Execute a aplicação usando Maven:
 
 ```bash
 ./mvnw spring-boot:run
